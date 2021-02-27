@@ -26,7 +26,8 @@ var (
 	RunMode string // 运行模式：debug | release
 
 	ServerHost string // 服务端运行监听地址
-	ServerPort string    // 服务端运行监听端口
+	ServerPort string // 服务端运行监听端口
+	PanelPort string // 面板服务监听端口
 
 	LogReadTimeout  time.Duration // 读取超时时间
 	LogWriteTimeout time.Duration // 写入超时时间
@@ -90,6 +91,7 @@ func loadServer() {
 
 	ServerHost = sec.Key("SERVER_HOST").MustString("localhost")
 	ServerPort = sec.Key("SERVER_PORT").MustString("44444")
+	PanelPort = sec.Key("PANEL_PORT").MustString("44445")
 	LogReadTimeout = time.Duration(sec.Key("READ_TIMEOUT").MustInt(60)) * time.Second
 	LogWriteTimeout = time.Duration(sec.Key("WRITE_TIMEOUT").MustInt(60)) * time.Second
 	LogFilePath = sec.Key("LOG_FILEPATH").MustString("log.txt")

@@ -51,21 +51,8 @@ func Run() {
 }
 
 func runPanel() {
-	//staticHandler := http.FileServer(http.Dir(path.Join(config.WorkPath, "panel")))
-	//
-	//http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-	//	staticHandler.ServeHTTP(writer, request)
-	//	//if request.URL.Path != "/" {
-	//	//	staticHandler.ServeHTTP(writer, request)
-	//	//	return
-	//	//}
-	//	//_, _ = io.WriteString(writer, "aa")
-	//})
-
-	http.Handle("/", http.FileServer(http.Dir(path.Join(config.WorkPath, "panel"))))
-
-	err := http.ListenAndServe(":44445", nil)
+	err := http.ListenAndServe(config.ServerHost + ":" + config.PanelPort, http.FileServer(http.Dir(path.Join(config.WorkPath, "panel"))))
 	if err != nil {
-		panic("静态服务器启动失败！错误信息：" + err.Error())
+		panic("面板服务器启动失败！错误信息：" + err.Error())
 	}
 }
